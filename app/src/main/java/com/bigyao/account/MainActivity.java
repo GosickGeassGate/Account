@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -160,6 +161,29 @@ public class MainActivity extends AppCompatActivity {
                 String incomeStr = ((TextView)view.findViewById(R.id.income)).getText().toString();
                 intent.putExtra("income", incomeStr.substring(3, incomeStr.length() - 1));
                 startActivity(intent);
+            }
+        });
+        accountList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final String idStr = ((TextView)view.findViewById(R.id.id)).getText().toString();
+                PopupMenu popup = new PopupMenu(MainActivity.this, view);
+                popup.getMenuInflater().inflate(R.menu.popup, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.delete:
+                                Toast.makeText(MainActivity.this, "删除成功~",Toast.LENGTH_SHORT).show();
+                                db.delete("account", "id = ?", new String[]{idStr});
+                                setListView();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
+                return true;
             }
         });
     }

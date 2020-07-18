@@ -114,7 +114,6 @@ public class IncomeActivity extends AppCompatActivity {
                     cv.put("detail", detail != null ? detail : "");
                     cv.put("income", income);
                     db.update("account", cv, "id=?", new String[]{id});
-
                     finish();
                 }
             }

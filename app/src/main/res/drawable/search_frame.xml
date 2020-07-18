@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 设置白色填充 -->
+    <solid
+        android:color="@android:color/white" />
+    <!-- 设置四个圆角的半径 -->
+    <corners
+        android:bottomLeftRadius="20sp"
+        android:bottomRightRadius="20sp"
+        android:topLeftRadius="20sp"
+        android:topRightRadius="20sp" />
+    <!-- 设置一下边距,让空间大一点 -->
+    <padding
+        android:left="10sp"
+        android:top="5sp"
+        android:bottom="5sp"/>
+</shape>

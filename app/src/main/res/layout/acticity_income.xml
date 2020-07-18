@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:id="@+id/titleTip"
+        android:text="标题："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTip"
+        android:id="@+id/titleEdit"
+        android:textColor="#501FAA" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/titleEdit"
+        android:id="@+id/dateTip"
+        android:text="日期："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateTip"
+        android:id="@+id/dateEdit"
+        android:textColor="#501FAA" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/dateEdit"
+        android:id="@+id/detailTip"
+        android:text="详情："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailTip"
+        android:id="@+id/detailEdit"
+        android:textColor="#501FAA" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/detailEdit"
+        android:id="@+id/incomeTip"
+        android:text="收支："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incomeTip"
+        android:id="@+id/incomeEdit"
+        android:inputType="number"
+        android:textColor="#501FAA" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incomeEdit"
+        android:id="@+id/save"
+        android:text="保存" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incomeEdit"
+        android:layout_toRightOf="@+id/save"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/cancel"
+        android:text="取消" />
+</RelativeLayout>

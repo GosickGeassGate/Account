@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView searchButton;
     private String keyword = null;
 
+    private TextView balanceView;   // 结算
+
     private DBOpenHandler dbOpenHandler;
     private SQLiteDatabase db;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> titleList = new ArrayList<>();
     ArrayList<String> dateList = new ArrayList<>();
     ArrayList<String> detailList = new ArrayList<>();
-    ArrayList<Integer> incomeList = new ArrayList<>();
+    ArrayList<String> incomeList = new ArrayList<>();
 
     final static int MAX_PROGRESS = 100; // 总进度
     private int progressStatus = 0; // 记录进度对话框的完成百分比
@@ -131,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        balanceView = (TextView)findViewById(R.id.balance);
+
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 //
 //        int version = prefs.getInt("version", 0);
@@ -208,19 +212,23 @@ public class MainActivity extends AppCompatActivity {
         int detailId = cursor.getColumnIndex("detail");
         int incomeId = cursor.getColumnIndex("income");
 
+        int totalIncome = 0;    // 总收支
+
         if(cursor.moveToFirst()){
             dataPrevious = cursor.getString(dateId);
             idList.add(ClassifyAdapter.LABEL);
             titleList.add(null);
             dateList.add(dataPrevious);
             detailList.add(null);
-            incomeList.add(0);
+            incomeList.add(null);
 
             dateList.add(dataPrevious);
             idList.add(cursor.getInt(idId));
             titleList.add(cursor.getString(titleId));
             detailList.add(cursor.getString(detailId));
-            incomeList.add(cursor.getInt(incomeId));
+            int income = cursor.getInt(incomeId);
+            incomeList.add(String.format("%d.%02d", income / 100, Math.abs(income % 100)));
+            totalIncome += income;
         }
 
         while(cursor.moveToNext()){
@@ -236,13 +244,14 @@ public class MainActivity extends AppCompatActivity {
                 titleList.add(null);
                 dateList.add(dataPrevious);
                 detailList.add(null);
-                incomeList.add(0);
+                incomeList.add(null);
             }
             idList.add(id);
             dateList.add(date);
             titleList.add(title);
             detailList.add(detail);
-            incomeList.add(income);
+            incomeList.add(String.format("%d.%02d", income / 100, Math.abs(income % 100)));
+            totalIncome += income;
         }
 
         list.clear();
@@ -261,6 +270,8 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{"id", "title", "date", "detail", "income"},
                 new int[]{R.id.id, R.id.title, R.id.date, R.id.detail, R.id.income});
         accountList.setAdapter(adapter);
+
+        balanceView.setText(String.format("总收支：%d.%02d元", totalIncome / 100, Math.abs(totalIncome % 100)));
     }
 
     @Override

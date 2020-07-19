@@ -55,7 +55,7 @@ public class IncomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final int income;
                 try{
-                    income = Integer.valueOf(incomeEdit.getText().toString());
+                    income = (int)(Float.valueOf(incomeEdit.getText().toString()) * 100);
                     Toast.makeText(IncomeActivity.this, "收支：" + income, Toast.LENGTH_SHORT).show();
                 }
                 catch(Exception e){

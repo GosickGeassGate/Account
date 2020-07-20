@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/dateTip"
         android:id="@+id/dateEdit"
+        android:focusableInTouchMode="false"
         android:textColor="#501FAA" />
     <TextView
         android:layout_width="wrap_content"

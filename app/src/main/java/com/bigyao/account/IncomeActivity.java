@@ -2,7 +2,9 @@ package com.bigyao.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,8 +13,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class IncomeActivity extends AppCompatActivity {
     private String id;
@@ -41,6 +46,22 @@ public class IncomeActivity extends AppCompatActivity {
         id = intent.getStringExtra("id");
         titleEdit.setText(intent.getStringExtra("title"));
         dateEdit.setText(intent.getStringExtra("date"));
+        dateEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                new DatePickerDialog(IncomeActivity.this, // 建对话（继承类）
+                        new DatePickerDialog.OnDateSetListener() {// 继承监听器(接口)
+                            @Override
+                            public void onDateSet(DatePicker dp, int year, int month, int dayOfMonth) {
+                                EditText dateEdit = (EditText) findViewById(R.id.dateEdit);
+                                dateEdit.setText(String.format("%d-%02d-%02d", year, (month + 1), dayOfMonth));
+                            }
+                        },
+                        c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                        c.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
         detailEdit.setText(intent.getStringExtra("detail"));
         incomeEdit.setText(intent.getStringExtra("income"));
 
